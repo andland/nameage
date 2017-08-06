@@ -1,0 +1,72 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+## nameage
+
+### Description
+
+This packages uses the U.S. Social Security Administration's baby names dataset and actuarial tables to estimate the age of an American based on their first name. It uses datasets conveniently collected in the [babynames](http://github.com/hadley/babynames) package and follows the same general format as the [gender](https://github.com/ropensci/gender) package.
+
+### Installation
+
+To install from Github, use the following commands.
+
+```{r eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("andland/nameage")
+```
+
+### Using the package
+
+The main function is `nameage()` which takes a vector of names as the first argument. There are two additional arguments:
+
+- `base_year`: Calculate the age effective at this year. It defaults to the last year of the SSA data (2015).
+- `age_range`: A range of ages to subset the analysis by. This can be useful if you know, for example, that the person is an adult.
+
+The function returns a data frame with a row for each name it can find. It includes a summary of the age distribution, including the mean, standard deviation, first quartile, median, and third quartile. In addition, it includes the number of people born with the names, as well as an estimate of the number of people still alive at the reference year.
+
+To start off, we will get the age of some names as of 2015. The `name` argument is not case sensitive.
+
+```{r}
+library(nameage)
+names = c("Andrew", "andy", "DREW", "Aleck", "alec", "ALEX")
+
+nameage(names, base_year = 2015)
+```
+
+The average age of people with a given name changes depending on the effective year. People named Aleck were in general much older in 1990 than they are today.
+
+```{r}
+nameage(names, base_year = 1990)
+```
+
+Looking at just working adults.
+
+```{r}
+nameage(names, base_year = 2015, age_range = c(18, 65))
+```
+
+Looking at just people that are not of legal age.
+
+```{r}
+nameage(names, base_year = 2015, age_range = c(0, 17))
+```
+
+
+### To do
+
+A few things I want to add:
+
+- Add the ability to subset by gender.
+- Create a plotting function to show the full distribution.
