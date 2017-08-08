@@ -11,6 +11,7 @@ Depends:
 Imports:
     babynames,
     dplyr,
+    ggplot2,
     ranger
 License: MIT + file LICENSE
 Encoding: UTF-8

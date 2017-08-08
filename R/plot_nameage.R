@@ -13,8 +13,8 @@
 #' @export
 #'
 #' @examples
-#' plot_nameage("Joseph", type = "age")
-#' plot_nameage("Joseph", type = "year")
+#' plot_nameage(c("Anna", "Joseph"), type = "age")
+#' plot_nameage(c("Anna", "Joseph"), type = "year")
 #'
 #' @import ggplot2
 plot_nameage <- function(names, base_year = 2015, age_range, type =  c("age", "year")) {

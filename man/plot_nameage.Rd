@@ -24,8 +24,8 @@ A ggplot2 object. It will have one facet per unique name.
 Plot the distribution of the age for a person based on name.
 }
 \examples{
-plot_nameage("Joseph", type = "age")
-plot_nameage("Joseph", type = "year")
+plot_nameage(c("Anna", "Joseph"), type = "age")
+plot_nameage(c("Anna", "Joseph"), type = "year")
 
 }
 
