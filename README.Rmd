@@ -59,16 +59,18 @@ Looking at just working adults.
 nameage(names, base_year = 2015, age_range = c(18, 65))
 ```
 
-Looking at just people that are not of legal age.
+I also created a function to plot the distribution of the ages for each name. It takes one additional parameter which tells whether to plot by age...
 
-```{r}
-nameage(names, base_year = 2015, age_range = c(0, 17))
+```{r fig.width=10}
+plot_nameage(c("Joseph", "Anna"), type = "age")
 ```
 
+or by year.
+
+```{r fig.width=10}
+plot_nameage(c("Joseph", "Anna"), type = "year")
+```
 
 ### To do
 
-A few things I want to add:
-
 - Add the ability to subset by gender.
-- Create a plotting function to show the full distribution.

@@ -37,13 +37,13 @@ nameage(names, base_year = 2015)
 #> # A tibble: 7 × 8
 #>       name      n   n_alive      mean        sd    q1 median    q3
 #>      <chr>  <int>     <dbl>     <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava 218673 210753.18  8.294741 11.171882     3      6     9
-#> 2     ELLA 281604 161998.27 20.663280 26.439171     4      8    17
-#> 3    elmer 129647  43057.38 63.093804 24.373373    52     69    82
-#> 4 gertrude 177359  20088.78 72.920919 15.176870    65     75    84
-#> 5     Jack 670805 435333.58 41.951320 30.124535    11     46    69
-#> 6     liam 155843 154870.93  6.179169  6.826197     2      4     9
-#> 7   Violet 127793  52927.93 28.742202 32.474662     3      8    63
+#> 1      Ava 218673 210756.22  8.295168 11.173480     3      6     9
+#> 2     ELLA 281604 162030.93 20.675174 26.450605     4      8    17
+#> 3    elmer 129647  43060.31 63.094983 24.373220    52     69    82
+#> 4 gertrude 177359  20118.93 72.937538 15.173509    65     75    84
+#> 5     Jack 670805 435342.78 41.952064 30.124809    11     46    69
+#> 6     liam 155843 154871.52  6.179128  6.826207     2      4     9
+#> 7   Violet 127793  52952.24 28.766640 32.488454     3      8    63
 ```
 
 The average age of people with a given name changes depending on the effective year. People named Violet were in general much older in 1990 than they are today.
@@ -53,13 +53,13 @@ nameage(names, base_year = 1990)
 #> # A tibble: 7 × 8
 #>       name      n    n_alive     mean        sd    q1 median    q3
 #>      <chr>  <int>      <dbl>    <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava  16333  12729.379 34.51354 19.184864    22     34    43
-#> 2     ELLA 156965  78986.602 52.65791 17.595504    41     55    66
-#> 3    elmer 124568  84237.507 57.09422 17.394958    48     62    70
-#> 4 gertrude 177020  73446.494 62.88282 13.372109    56     66    72
-#> 5     Jack 489076 400256.872 47.94869 18.364396    36     51    62
-#> 6     liam   3108   3057.406 10.70788  9.150348     3      8    16
-#> 7   Violet  94798  54067.752 56.93661 17.104666    49     62    69
+#> 1      Ava  16333  12731.433 34.51864 19.188965    22     34    43
+#> 2     ELLA 156965  79019.361 52.66651 17.598272    41     55    66
+#> 3    elmer 124568  84292.715 57.10297 17.392310    48     62    70
+#> 4 gertrude 177020  73505.317 62.89247 13.372459    56     66    72
+#> 5     Jack 489076 400380.078 47.95604 18.365936    36     51    62
+#> 6     liam   3108   3057.442 10.70789  9.150351     3      8    16
+#> 7   Violet  94798  54096.083 56.94518 17.105129    49     62    69
 ```
 
 Looking at just working adults.
@@ -69,34 +69,31 @@ nameage(names, base_year = 2015, age_range = c(18, 65))
 #> # A tibble: 7 × 8
 #>       name      n    n_alive     mean        sd    q1 median    q3
 #>      <chr>  <int>      <dbl>    <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava  11473  10235.054 43.92543 15.565532    28     48    58
-#> 2     ELLA  22364  19379.495 49.26734 14.291413    41     54    61
-#> 3    elmer  16250  15008.410 48.20726 13.928635    39     52    60
-#> 4 gertrude   5834   4870.340 55.87213  9.379237    52     59    63
-#> 5     Jack 156823 145583.034 46.34723 15.093314    34     51    59
-#> 6     liam   9808   9630.839 24.58994  9.033423    19     20    27
-#> 7   Violet  10251   9039.500 46.37529 14.614003    34     51    59
+#> 1      Ava  11473  10234.765 43.92403 15.564642    28     48    58
+#> 2     ELLA  22364  19378.151 49.26520 14.290764    41     54    61
+#> 3    elmer  16250  15009.057 48.20744 13.928359    39     52    60
+#> 4 gertrude   5834   4869.456 55.86964  9.379266    52     59    63
+#> 5     Jack 156823 145589.329 46.34761 15.093047    34     51    59
+#> 6     liam   9808   9630.748 24.59016  9.033471    19     20    27
+#> 7   Violet  10251   9038.958 46.37338 14.613091    34     51    59
 ```
 
-Looking at just people that are not of legal age.
+I also created a function to plot the distribution of the ages for each name. It takes one additional parameter which tells whether to plot by age...
 
 ``` r
-nameage(names, base_year = 2015, age_range = c(0, 17))
-#> # A tibble: 7 × 8
-#>       name      n     n_alive     mean       sd    q1 median    q3
-#>      <chr>  <int>       <dbl>    <dbl>    <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava 200382 199010.2201 5.960100 3.905668     3      6     9
-#> 2     ELLA 122435 121560.9346 6.429290 4.013496     3      6    10
-#> 3    elmer   3589   3564.4290 8.998820 4.937470     5      9    13
-#> 4 gertrude    265    263.0687 7.232624 5.125877     3      7    11
-#> 5     Jack 159808 158750.1411 8.367376 4.944295     4      8    12
-#> 6     liam 146030 145236.0101 4.956585 4.494245     1      4     7
-#> 7   Violet  31913  31720.2956 4.354899 3.890027     1      3     7
+plot_nameage(c("Joseph", "Anna"), type = "age")
 ```
+
+![](README-unnamed-chunk-6-1.png)
+
+or by year.
+
+``` r
+plot_nameage(c("Joseph", "Anna"), type = "year")
+```
+
+![](README-unnamed-chunk-7-1.png)
 
 ### To do
 
-A few things I want to add:
-
 -   Add the ability to subset by gender.
--   Create a plotting function to show the full distribution.
