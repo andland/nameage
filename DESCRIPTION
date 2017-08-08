@@ -2,8 +2,8 @@ Package: nameage
 Type: Package
 Title: Calculate the age of a person based on their first name
 Version: 0.1
-Author: Andrew Landgraf
-Maintainer: Andrew Landgraf <andland@gmail.com>
+Author: Andrew J. Landgraf
+Maintainer: Andrew J. Landgraf <andland@gmail.com>
 Description: Uses the USA SSA baby names data set and actuarial 
     tables to calculate summaries of the distribution age by first name.
 Depends:

@@ -11,9 +11,9 @@ nameage(names, base_year = 2015, age_range)
 
 \item{base_year}{Year that the age is calculated as of.}
 
-\item{age_range}{Limit the age of possible ages that the name could come from.
+\item{age_range}{Limit the range of possible ages that the name could come from.
 This could be useful if you know, for example, that the name is of an adult.
-If missing, all ages will be considered}
+If missing, all ages will be considered.}
 }
 \value{
 Returns a data frame containing the results of predicting the age.
@@ -30,7 +30,7 @@ Returns a data frame containing the results of predicting the age.
   reference year.}
 }
 \description{
-Estimate the age of a person based on their first name
+Estimate the age of a person based on their first name.
 }
 \examples{
 # age as of 2015

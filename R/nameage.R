@@ -10,13 +10,13 @@ weighted_quantile <- function(x, ecdf, probs) {
 
 #' nameage
 #'
-#' Estimate the age of a person based on their first name
+#' Estimate the age of a person based on their first name.
 #'
 #' @param names First names as a character vector. Names are case insensitive.
 #' @param base_year Year that the age is calculated as of.
-#' @param age_range Limit the age of possible ages that the name could come from.
+#' @param age_range Limit the range of possible ages that the name could come from.
 #'   This could be useful if you know, for example, that the name is of an adult.
-#'   If missing, all ages will be considered
+#'   If missing, all ages will be considered.
 #'
 #' @return Returns a data frame containing the results of predicting the age.
 #'   There will be one row per name found in the \code{babynames} dataset,
@@ -59,11 +59,11 @@ nameage <- function(names, base_year = 2015, age_range) {
     stopifnot(base_year >= (bn_year_range[1] + 20), base_year <= (bn_year_range[2] + 5))
   }
 
-  names_df = tibble(name = unique(names), name_lower = tolower(unique(names)))
+  names_df = dplyr::tibble(name = unique(names), name_lower = tolower(unique(names)))
   bn = babynames::babynames %>%
-    mutate(name_lower = tolower(name)) %>%
-    select(-name) %>%
-    inner_join(names_df, by = "name_lower") %>%
+    dplyr::mutate(name_lower = tolower(name)) %>%
+    dplyr::select(-name) %>%
+    dplyr::inner_join(names_df, by = "name_lower") %>%
     dplyr::mutate(age = base_year - year) %>%
     dplyr::filter(
       age >= min(age_range), age <= max(age_range)
@@ -72,13 +72,13 @@ nameage <- function(names, base_year = 2015, age_range) {
     dplyr::select(birth_year, age, name, sex, n)
 
   actuarial_test_data = bn %>%
-    select(birth_year, age, sex) %>%
+    dplyr::select(birth_year, age, sex) %>%
     unique() %>%
-    mutate(prop = predict(actuarial_rf_model, .)[["predictions"]])
+    dplyr::mutate(prop = predict(actuarial_rf_model, .)[["predictions"]])
   stopifnot(min(actuarial_test_data$prop) >= 0, max(actuarial_test_data$prop) <= 1)
 
   bn = bn %>%
-    inner_join(actuarial_test_data, by = c("birth_year", "age", "sex"))
+    dplyr::inner_join(actuarial_test_data, by = c("birth_year", "age", "sex"))
 
   bn = bn %>%
     dplyr::mutate(n_alive = n * prop) %>%
