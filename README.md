@@ -78,7 +78,7 @@ nameage(names, base_year = 2015, age_range = c(18, 65))
 #> 7   Violet  10251   9038.958 46.37338 14.613091    34     51    59
 ```
 
-I also created a function to plot the distribution of the ages for each name. It takes one additional parameter which tells whether to plot by age...
+The package also includes a function to plot the distribution of the ages for each name. In addition to a few arguments to control the plotting, there is an additional parameter `type` which tells whether to plot by age...
 
 ``` r
 plot_nameage(c("Joseph", "Anna"), type = "age")

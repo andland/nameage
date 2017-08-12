@@ -4,7 +4,9 @@
 \alias{plot_nameage}
 \title{plot_nameage}
 \usage{
-plot_nameage(names, base_year = 2015, age_range, type = c("age", "year"))
+plot_nameage(names, base_year = 2015, age_range, type = c("age", "year"),
+  alive_geom = c("area", "bar"), facet_scales = c("free_y", "free_x",
+  "free", "fixed"), fill_color = "#008b8b", line_color = "black")
 }
 \arguments{
 \item{names}{First names as a character vector. Names are case insensitive.}
@@ -16,9 +18,17 @@ This could be useful if you know, for example, that the name is of an adult.
 If missing, all ages will be considered.}
 
 \item{type}{Whether to plot age or year on the x-axis.}
+
+\item{alive_geom}{Choice of whether to plot as an area or bar chart.}
+
+\item{facet_scales}{Passed to the \code{scales} argument of \code{facet_wrap}.}
+
+\item{fill_color}{The color that the number alive gets filled in as.}
+
+\item{line_color}{The color that the number born is colored.}
 }
 \value{
-A ggplot2 object. It will have one facet per unique name.
+A \code{ggplot2} object. It will have one facet per unique name.
 }
 \description{
 Plot the distribution of the age for a person based on name.
