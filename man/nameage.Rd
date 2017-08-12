@@ -39,8 +39,6 @@ nameage(c("Andrew", "Aleck"), base_year = 2015)
 nameage(c("Andrew", "Aleck"), base_year = 1990)
 # age of adults
 nameage(c("Andrew", "Aleck"), base_year = 2015, age_range = c(18, 65))
-# age of children
-nameage(c("Andrew", "Aleck"), base_year = 2015, age_range = c(0, 17))
 
 }
 

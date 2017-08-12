@@ -1,3 +1,6 @@
+#' @importFrom utils globalVariables
+utils::globalVariables(c("name", "year", "age", "birth_year", "sex", ".", "prop", "n_alive", "n"))
+
 #' plot_nameage
 #'
 #' Plot the distribution of the age for a person based on name.
@@ -16,8 +19,7 @@
 #' plot_nameage(c("Anna", "Joseph"), type = "age")
 #' plot_nameage(c("Anna", "Joseph"), type = "year")
 #'
-#' @import ggplot2
-plot_nameage <- function(names, base_year = 2015, age_range, type =  c("age", "year")) {
+#' @importFrom ggplot2 ggplot aes_string geom_area geom_bar geom_line facet_wrap scale_color_manual scale_fill_manual labs
   # TODO:
   # - add gender option
 
