@@ -1,3 +1,6 @@
+#' @importFrom utils globalVariables
+utils::globalVariables(c("name", "year", "age", "birth_year", "sex", ".", "prop", "weight", "ecdf"))
+
 # saves time by assuming x is sorted and using ecdf
 weighted_quantile <- function(x, ecdf, probs) {
   quants = numeric(length(probs))
@@ -38,12 +41,12 @@ weighted_quantile <- function(x, ecdf, probs) {
 #' nameage(c("Andrew", "Aleck"), base_year = 1990)
 #' # age of adults
 #' nameage(c("Andrew", "Aleck"), base_year = 2015, age_range = c(18, 65))
-#' # age of children
-#' nameage(c("Andrew", "Aleck"), base_year = 2015, age_range = c(0, 17))
 #'
+#' @importFrom stats predict
 #' @importFrom ranger ranger
-#' @import babynames
-#' @import dplyr
+# @import babynames
+#' @importFrom magrittr %>%
+#' @importFrom dplyr mutate select inner_join filter rename group_by summarize ungroup
 nameage <- function(names, base_year = 2015, age_range) {
   # TODO:
   # - add gender option
