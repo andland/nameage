@@ -1,5 +1,5 @@
 #' @importFrom utils globalVariables
-utils::globalVariables(c("name", "year", "age", "birth_year", "sex", ".", "prop", "weight", "ecdf"))
+utils::globalVariables(c("name", "year", "age", "birth_year", "sex", ".", "prop", "weight", "ecdf", "approx_fun", "age_match"))
 
 # saves time by assuming x is sorted and using ecdf
 weighted_quantile <- function(x, ecdf, probs) {
@@ -42,9 +42,6 @@ weighted_quantile <- function(x, ecdf, probs) {
 #' # age of adults
 #' nameage(c("Andrew", "Aleck"), base_year = 2015, age_range = c(18, 65))
 #'
-#' @importFrom stats predict
-#' @importFrom ranger ranger
-# @import babynames
 #' @importFrom magrittr %>%
 #' @importFrom dplyr mutate select inner_join filter rename group_by summarize ungroup
 nameage <- function(names, base_year = 2015, age_range) {
@@ -77,7 +74,13 @@ nameage <- function(names, base_year = 2015, age_range) {
   actuarial_test_data = bn %>%
     dplyr::select(birth_year, age, sex) %>%
     unique() %>%
-    dplyr::mutate(prop = predict(actuarial_rf_model, .)[["predictions"]])
+    dplyr::mutate(age_match = round(pmin(max(actuarial_data_interpolation$age), age))) %>%
+    dplyr::left_join(actuarial_data_interpolation, by = c("sex", age_match = "age")) %>%
+    dplyr::mutate(
+      prop = mapply(function(.x, .y) .x(.y), .x = approx_fun, .y = birth_year)
+    ) %>%
+    dplyr::select(-age_match)
+  stopifnot(!is.na(actuarial_test_data$prop))
   stopifnot(min(actuarial_test_data$prop) >= 0, max(actuarial_test_data$prop) <= 1)
 
   bn = bn %>%

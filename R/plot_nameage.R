@@ -65,7 +65,13 @@ plot_nameage <- function(names, base_year = 2015, age_range, type =  c("age", "y
   actuarial_test_data = bn %>%
     dplyr::select(birth_year, age, sex) %>%
     unique() %>%
-    dplyr::mutate(prop = predict(actuarial_rf_model, .)[["predictions"]])
+    dplyr::mutate(age_match = round(pmin(max(actuarial_data_interpolation$age), age))) %>%
+    dplyr::left_join(actuarial_data_interpolation, by = c("sex", age_match = "age")) %>%
+    dplyr::mutate(
+      prop = mapply(function(.x, .y) .x(.y), .x = approx_fun, .y = birth_year)
+    ) %>%
+    dplyr::select(-age_match)
+  stopifnot(!is.na(actuarial_test_data$prop))
   stopifnot(min(actuarial_test_data$prop) >= 0, max(actuarial_test_data$prop) <= 1)
 
   bn = bn %>%
@@ -129,12 +135,12 @@ plot_nameage <- function(names, base_year = 2015, age_range, type =  c("age", "y
   #   )
 
   plt = ggplot2::ggplot(bn, ggplot2::aes_string(type))
-    if (alive_geom == "area") {
-      plt = plt + ggplot2::geom_area(stat = "identity", ggplot2::aes(y = n_alive, fill = "Alive"))
-    } else {
-      plt = plt + ggplot2::geom_bar(stat = "identity", ggplot2::aes(y = n_alive, fill = "Alive"))
-    }
-    plt + ggplot2::geom_line(ggplot2::aes(y = n, color = "Born"), size = 1) +
+  if (alive_geom == "area") {
+    plt = plt + ggplot2::geom_area(stat = "identity", ggplot2::aes(y = n_alive, fill = "Alive"))
+  } else {
+    plt = plt + ggplot2::geom_bar(stat = "identity", ggplot2::aes(y = n_alive, fill = "Alive"))
+  }
+  plt + ggplot2::geom_line(ggplot2::aes(y = n, color = "Born"), size = 1) +
     ggplot2::facet_wrap(~ name, scales = facet_scales) +
     ggplot2::scale_color_manual(values = line_color) +
     ggplot2::scale_fill_manual(values = fill_color) +
