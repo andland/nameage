@@ -34,48 +34,48 @@ library(nameage)
 names = c("Ava", "liam", "Jack", "ELLA", "gertrude", "elmer", "Violet")
 
 nameage(names, base_year = 2015)
-#> # A tibble: 7 × 8
+#> # A tibble: 7 x 8
 #>       name      n   n_alive      mean        sd    q1 median    q3
 #>      <chr>  <int>     <dbl>     <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava 218673 210756.22  8.295168 11.173480     3      6     9
-#> 2     ELLA 281604 162030.93 20.675174 26.450605     4      8    17
-#> 3    elmer 129647  43060.31 63.094983 24.373220    52     69    82
-#> 4 gertrude 177359  20118.93 72.937538 15.173509    65     75    84
-#> 5     Jack 670805 435342.78 41.952064 30.124809    11     46    69
-#> 6     liam 155843 154871.52  6.179128  6.826207     2      4     9
-#> 7   Violet 127793  52952.24 28.766640 32.488454     3      8    63
+#> 1      Ava 218673 211933.04  8.565290 11.895632     3      6     9
+#> 2     ELLA 281604 170996.91 23.702506 28.987314     4      9    47
+#> 3    elmer 129647  34744.58 58.583760 24.460978    45     65    77
+#> 4 gertrude 177359  28260.08 76.450368 14.851850    68     79    87
+#> 5     Jack 670805 393056.09 38.155401 28.934937    10     35    65
+#> 6     liam 155843 154631.51  6.160169  6.783567     2      4     9
+#> 7   Violet 127793  59330.14 34.583680 35.197413     3     11    72
 ```
 
 The average age of people with a given name changes depending on the effective year. People named Violet were in general much older in 1990 than they are today.
 
 ``` r
 nameage(names, base_year = 1990)
-#> # A tibble: 7 × 8
+#> # A tibble: 7 x 8
 #>       name      n    n_alive     mean        sd    q1 median    q3
 #>      <chr>  <int>      <dbl>    <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava  16333  12731.433 34.51864 19.188965    22     34    43
-#> 2     ELLA 156965  79019.361 52.66651 17.598272    41     55    66
-#> 3    elmer 124568  84292.715 57.10297 17.392310    48     62    70
-#> 4 gertrude 177020  73505.317 62.89247 13.372459    56     66    72
-#> 5     Jack 489076 400380.078 47.95604 18.365936    36     51    62
-#> 6     liam   3108   3057.442 10.70789  9.150351     3      8    16
-#> 7   Violet  94798  54096.083 56.94518 17.105129    49     62    69
+#> 1      Ava  16333  13598.669 36.21455 20.246055    23     35    48
+#> 2     ELLA 156965  92272.773 55.17945 18.151856    43     58    69
+#> 3    elmer 124568  71598.627 55.00142 17.462330    45     60    68
+#> 4 gertrude 177020  93380.556 65.12151 13.443510    59     68    74
+#> 5     Jack 489076 362527.842 46.42406 18.163925    34     49    61
+#> 6     liam   3108   3038.564 10.64685  9.108123     3      8    16
+#> 7   Violet  94798  64561.901 59.03853 16.903045    52     63    70
 ```
 
 Looking at just working adults.
 
 ``` r
 nameage(names, base_year = 2015, age_range = c(18, 65))
-#> # A tibble: 7 × 8
+#> # A tibble: 7 x 8
 #>       name      n    n_alive     mean        sd    q1 median    q3
 #>      <chr>  <int>      <dbl>    <dbl>     <dbl> <dbl>  <dbl> <dbl>
-#> 1      Ava  11473  10234.765 43.92403 15.564642    28     48    58
-#> 2     ELLA  22364  19378.151 49.26520 14.290764    41     54    61
-#> 3    elmer  16250  15009.057 48.20744 13.928359    39     52    60
-#> 4 gertrude   5834   4869.456 55.86964  9.379266    52     59    63
-#> 5     Jack 156823 145589.329 46.34761 15.093047    34     51    59
-#> 6     liam   9808   9630.748 24.59016  9.033471    19     20    27
-#> 7   Violet  10251   9038.958 46.37338 14.613091    34     51    59
+#> 1      Ava  11473  10722.867 44.43247 15.521935    29     49    59
+#> 2     ELLA  22364  20542.477 49.71888 14.131531    42     55    61
+#> 3    elmer  16250  14255.575 47.78234 14.019756    38     52    60
+#> 4 gertrude   5834   5244.547 56.11059  9.220711    53     59    63
+#> 5     Jack 156823 138622.649 45.86359 15.170339    33     50    59
+#> 6     liam   9808   9534.760 24.48821  8.921051    19     20    27
+#> 7   Violet  10251   9515.762 46.84895 14.539712    34     51    59
 ```
 
 The package also includes a function to plot the distribution of the ages for each name. In addition to a few arguments to control the plotting, there is an additional parameter `type` which tells whether to plot by age...
