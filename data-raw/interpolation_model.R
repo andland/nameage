@@ -14,7 +14,17 @@ set.seed(42)
 actuarial_rf_model = ranger::ranger(prop ~ ., data = actuarial_data, num.trees = 500, replace = FALSE, mtry = 3)
 
 # works assuming age is between 0 and 119 (whole numbers)
-actuarial_data_interpolation = actuarial_data %>%
+actuarial_data_aug = actuarial_data %>%
+  bind_rows(
+    actuarial_data %>%
+      distinct(sex, birth_year) %>%
+      mutate(
+        age = max(actuarial_data$age) + 1,
+        prop = 0
+      )
+  )
+
+actuarial_data_interpolation = actuarial_data_aug %>%
   mutate(
     sex = as.character(sex)
   ) %>%
